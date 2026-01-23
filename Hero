@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawaa | Pure Air</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Smooth fade-in animation for text */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <section class="relative h-screen w-full overflow-hidden">
+        
+        <video 
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            class="absolute top-0 left-0 w-full h-full object-cover z-0"
+        >
+            <source src="https://cdn.coverr.co/videos/coverr-foggy-forest-road-4560/1080p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="absolute top-0 left-0 w-full h-full bg-black/20 z-1"></div>
+
+        <div class="relative z-10 flex flex-col justify-between h-full py-16 px-6 md:py-24">
+            
+            <div class="text-center fade-in-up" style="animation-delay: 0.2s;">
+                <h1 class="text-5xl md:text-7xl font-semibold tracking-wide mb-2">Hawaa</h1>
+                <p class="text-lg md:text-xl font-light tracking-wider opacity-90">Pure air, by design.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
+                
+                <a href="#order" class="w-full md:w-64 bg-white text-black py-3 rounded text-center text-sm font-medium uppercase tracking-widest hover:bg-gray-200 transition duration-300">
+                    Order Hawaa One
+                </a>
+
+                <a href="#specs" class="w-full md:w-64 bg-gray-900/60 backdrop-blur-md text-white py-3 rounded text-center text-sm font-medium uppercase tracking-widest hover:bg-gray-800/80 transition duration-300">
+                    View Specs
+                </a>
+            
+            </div>
+        </div>
+
+        <div class="absolute bottom-4 left-0 w-full flex justify-center z-10 animate-bounce">
+            <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+
+    </section>
+
+    </body>
+</html>
