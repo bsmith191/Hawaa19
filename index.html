@@ -3,335 +3,890 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hawaa | Pure Air</title>
+    <title>HAWAA - Pure Air. Engineered for India.</title>
+    
+    <!-- Google Fonts - Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP Core + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
     <style>
-        /* === CORE RESET & GLOBAL STYLES === */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #050505; color: #fff; overflow-x: hidden; }
-        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
-        h2.section-title { font-size: 40px; font-weight: 600; margin-bottom: 50px; letter-spacing: -0.5px; }
-        p.lead { font-size: 20px; color: #aaa; line-height: 1.5; max-width: 700px; }
-
-        /* === 1. TESLA-STYLE HEADER === */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; background: transparent;
-        }
-        .brand-logo {
-            font-size: 22px; font-weight: 500; /* Medium weight */
-            letter-spacing: 1px; color: #fff; text-decoration: none;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-        }
-        .menu-btn {
-            background: rgba(50, 50, 50, 0.3); backdrop-filter: blur(10px);
-            padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 500;
-            cursor: pointer; transition: background 0.3s;
-        }
-        .menu-btn:hover { background: rgba(80, 80, 80, 0.5); }
-
-        /* === 2. HERO SECTION (Video Background) === */
-        .hero {
-            height: 100vh; width: 100%; position: relative;
-            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
-            padding-top: 20vh; text-align: center;
-            padding-left: 0; padding-right: 0; max-width: none; /* Full width */
-        }
-        .video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -1;
-            filter: brightness(0.7); /* Dim video slightly for text readability */
-        }
-        .hero h1 { font-size: 56px; font-weight: 700; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 22px; opacity: 0.9; margin-bottom: 30px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
-        .btn-container { display: flex; gap: 15px; }
-        .btn {
-            padding: 14px 50px; border-radius: 4px; font-size: 15px; font-weight: 500;
-            border: none; cursor: pointer; transition: transform 0.2s, background 0.2s;
-        }
-        .btn:hover { transform: scale(1.03); }
-        .btn-primary { background: #fff; color: #000; }
-        .btn-secondary { background: rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(10px); }
-
-        /* === 3. APPLE-STYLE 3D BENTO GRID === */
-        .bento-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 320px);
-            gap: 20px; perspective: 1000px; /* Enables 3D space */
-        }
-        .grid-item {
-            background: #111; border-radius: 24px; overflow: hidden; position: relative;
-            border: 1px solid rgba(255,255,255,0.05);
-            transform-style: preserve-3d; /* Important for children pop-out */
-            transition: transform 0.1s ease-out; /* Faster for iPad responsiveness */
-        }
-        .grid-item:hover { border-color: rgba(255,255,255,0.2); }
-        .card-content { position: absolute; bottom: 30px; left: 30px; z-index: 2; transform: translateZ(20px); }
-        .card-title { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
-        .card-desc { font-size: 16px; color: #aaa; }
-
-        /* The 3D Interactive Product Card */
-        .item-main {
-            grid-column: span 1; grid-row: span 2;
-            background: linear-gradient(135deg, #f0f0eb 0%, #d9d9d4 100%); 
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
-        }
-        .item-main img {
-            width: 85%; height: auto; object-fit: contain;
-            transform: translateZ(60px); 
-            filter: drop-shadow(0 30px 30px rgba(0,0,0,0.2));
-            pointer-events: none;
-        }
-        /* The Glare Effect Layer */
-        .card-glare {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 60%);
-            opacity: 0; mix-blend-mode: overlay; pointer-events: none; transition: opacity 0.2s; z-index: 5;
+        /* ===========================
+           GLOBAL RESET & BASE STYLES
+        =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        /* Other Grid Items */
-        .item-wide { grid-column: span 2; }
-        .bg-dark { background: linear-gradient(145deg, #1a1a1a, #0d0d0d); }
-        .center-stat { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; }
-        .stat-number { font-size: 64px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
-        .stat-unit { font-size: 18px; color: #888; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* === 4. LAB REPORT SECTION === */
-        .lab-section { display: flex; gap: 60px; align-items: center; border-top: 1px solid #222; padding-top: 100px; }
-        .lab-text { flex: 1; }
-        .lab-badges { display: flex; gap: 30px; flex: 1; }
-        .badge { border: 1px solid #333; padding: 20px; border-radius: 16px; text-align: center; flex: 1; }
-        .badge h3 { font-size: 24px; margin-bottom: 5px; color: #4CAF50; }
-        .badge p { color: #888; }
-
-        /* === 5. REVIEWS SECTION === */
-        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
-        .review-card { background: #111; padding: 30px; border-radius: 20px; border: 1px solid #222; }
-        .stars { color: #FFD700; margin-bottom: 15px; }
-        .review-text { font-size: 18px; line-height: 1.4; margin-bottom: 20px; font-style: italic; color: #ddd; }
-        .review-author { font-weight: 600; }
-        .review-loc { font-size: 14px; color: #666; }
-
-        /* === 6. FILTER REPLACEMENT SECTION === */
-        .filter-section { text-align: center; background: #0a0a0a; border-radius: 30px; padding: 80px 40px; }
-        .price-tag { font-size: 48px; font-weight: 700; margin: 30px 0 10px; }
-        .price-sub { color: #888; margin-bottom: 30px; }
-
-        /* === 7. FAQ SECTION === */
-        .faq-item { border-bottom: 1px solid #222; padding: 20px 0; }
-        details summary { font-size: 22px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
-        details summary::-webkit-details-marker { display: none; }
-        details summary::after { content: '+'; font-size: 28px; font-weight: 300; color: #666; }
-        details[open] summary::after { content: '−'; }
-        details p { font-size: 18px; color: #aaa; margin-top: 15px; line-height: 1.6; padding-right: 40px; }
-
-        /* === 8. FOOTER === */
-        footer { background: #0a0a0a; padding: 80px 20px; margin-top: 100px; text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
-        .footer-links a { color: #666; text-decoration: none; font-size: 14px; }
-        .made-in { color: #444; font-size: 14px; margin-top: 40px; }
-
-        /* === MOBILE RESPONSIVE === */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* ===========================
+           GLASS NAVIGATION
+        =========================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav.scrolled {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav__logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+        
+        .nav__cta {
+            background: #fff;
+            color: #000;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .nav__cta:hover {
+            transform: scale(1.05);
+        }
+        
+        /* ===========================
+           HERO SECTION - CINEMATIC INTRO
+        =========================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .hero__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+            z-index: -1;
+        }
+        
+        .hero__content {
+            z-index: 1;
+            padding: 0 2rem;
+        }
+        
+        .hero__headline {
+            font-size: clamp(3rem, 5vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+        }
+        
+        .hero__subhead {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 300;
+            color: #cccccc;
+            opacity: 0;
+        }
+        
+        /* ===========================
+           STICKY SCROLLYTELLING ENGINE
+        =========================== */
+        .scroll-container {
+            height: 400vh;
+            position: relative;
+        }
+        
+        .sticky-stage {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            max-width: 500px;
+            width: 80%;
+            height: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Story Steps - Absolutely positioned text overlays */
+        .story-step {
+            position: absolute;
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            opacity: 0;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .story-step.step-1 {
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .story-step.step-2 {
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .story-step.step-3 {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* ===========================
+           SCIENCE & CREDIBILITY SECTION
+        =========================== */
+        .science-section {
+            background: #0a0a0a;
+            padding: 8rem 4rem;
+        }
+        
+        .science-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .science-content h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .science-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 3rem;
+        }
+        
+        .badges {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            border: 2px solid #d4af37;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #d4af37;
+            letter-spacing: 1px;
+        }
+        
+        .lab-report-container {
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .lab-report {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            transform: rotate(-3deg);
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .lab-report:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 30px 30px 80px rgba(0,0,0,0.7);
+        }
+        
+        /* ===========================
+           WALL OF LOVE - INFINITE MARQUEE
+        =========================== */
+        .reviews-section {
+            background: #000;
+            padding: 8rem 0;
+            overflow: hidden;
+        }
+        
+        .reviews-section h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 4rem;
+        }
+        
+        .marquee {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 40s linear infinite;
+        }
+        
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .review-card {
+            min-width: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            flex-shrink: 0;
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            font-style: italic;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        
+        .reviewer-name {
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        /* ===========================
+           FILTER SECTION - UPSELL
+        =========================== */
+        .filter-section {
+            background: #0a0a0a;
+            padding: 8rem 4rem;
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .filter-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, rgba(212,175,55,0.2), transparent);
+            border-radius: 50%;
+            padding: 4rem;
+        }
+        
+        .filter-image {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+        }
+        
+        .filter-content h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #d4af37;
+        }
+        
+        .filter-cta {
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #d4af37, #f5deb3);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .filter-cta:hover {
+            transform: scale(1.02);
+        }
+        
+        /* ===========================
+           FAQ SECTION
+        =========================== */
+        .faq-section {
+            background: #000;
+            padding: 8rem 4rem;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 4rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-align: left;
+            padding: 2rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: #d4af37;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.4s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.4s ease;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .faq-answer-content {
+            padding-bottom: 2rem;
+        }
+        
+        /* ===========================
+           FOOTER
+        =========================== */
+        .footer {
+            background: #0a0a0a;
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer p {
+            color: #666;
+            font-weight: 300;
+        }
+        
+        /* ===========================
+           MOBILE RESPONSIVE
+        =========================== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 42px; }
-            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            /* On mobile, main product is on top, taller */
-            .item-main { grid-column: span 1; height: 450px; order: -1; }
+            .nav {
+                padding: 1rem 2rem;
+            }
             
-            .lab-section, .reviews-grid { flex-direction: column; grid-template-columns: 1fr; }
-            .btn-container { flex-direction: column; width: 100%; }
-            .btn { width: 100%; }
+            .nav__logo {
+                font-size: 1.2rem;
+            }
+            
+            .nav__cta {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            /* CRITICAL: Disable sticky scrolling on mobile */
+            .scroll-container {
+                height: auto;
+            }
+            
+            .sticky-stage {
+                position: relative;
+                height: auto;
+                padding: 4rem 2rem;
+            }
+            
+            .story-step {
+                position: relative;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: auto !important;
+                transform: none !important;
+                margin: 2rem 0;
+                opacity: 1;
+                font-size: 2rem;
+            }
+            
+            .product-image {
+                margin: 2rem 0;
+            }
+            
+            .science-grid,
+            .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .science-section,
+            .filter-section,
+            .reviews-section,
+            .faq-section {
+                padding: 4rem 2rem;
+            }
+            
+            .lab-report {
+                transform: rotate(0deg);
+            }
+            
+            .review-card {
+                min-width: 300px;
+            }
+            
+            .faq-question {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <a href="#" class="brand-logo">Hawaa</a>
-        <div class="menu-btn">Menu</div>
-    </header>
-
+    
+    <!-- GLASS NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="nav__logo">HAWAA</div>
+        <button class="nav__cta">Order</button>
+    </nav>
+    
+    <!-- HERO SECTION -->
     <section class="hero">
-        <video class="video-bg" autoplay muted loop playsinline>
-            <source src="hero.mp4.MP4" type="video/mp4">
+        <video class="hero__video" autoplay muted loop playsinline>
+            <source src="video.mp4.MP4" type="video/mp4">
         </video>
-        
-        <h1>Pure air, by design.</h1>
-        <p class="lead">Engineered for the specific pollution challenges of Indian cities.</p>
-        
-        <div class="btn-container">
-            <button class="btn btn-primary" onclick="document.getElementById('specs').scrollIntoView({behavior: 'smooth'})">Order Now</button>
-            <button class="btn btn-secondary">Watch Film</button>
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__headline" id="headline">Pure Air. Engineered for India.</h1>
+            <p class="hero__subhead" id="subhead">Medical-grade filtration. Zero noise.</p>
         </div>
     </section>
-
-    <section id="specs">
-        <h2 class="section-title">Engineered for India</h2>
-        <div class="bento-grid">
-            <div class="grid-item item-main" id="tilt-card">
-                <div class="card-glare"></div>
-                <img src="purifier.PNG" alt="Hawaa Purifier">
-            </div>
-
-            <div class="grid-item item-wide bg-dark center-stat">
-                <div class="stat-number">99.97%</div>
-                <div class="stat-unit">Particle Removal (PM 2.5)</div>
-                <div class="card-content">
-                    <div class="card-title" style="font-size: 20px; margin:0;">True HEPA H13</div>
+    
+    <!-- STICKY SCROLLYTELLING ENGINE -->
+    <div class="scroll-container" id="scrollContainer">
+        <div class="sticky-stage">
+            <img src="purifier.PNG" alt="HAWAA Air Purifier" class="product-image" id="productImage">
+            
+            <!-- Story Steps -->
+            <div class="story-step step-1" id="step1">99.97% Purity.</div>
+            <div class="story-step step-2" id="step2">24dB Whisper Mode.</div>
+            <div class="story-step step-3" id="step3">450 sq.ft in 12 mins.</div>
+        </div>
+    </div>
+    
+    <!-- SCIENCE & CREDIBILITY -->
+    <section class="science-section">
+        <div class="science-grid">
+            <div class="science-content">
+                <h2>Lab-Tested. Doctor-Approved.</h2>
+                <p>HAWAA's H13 True HEPA filter captures PM2.5, pollen, bacteria, and viruses with medical-grade precision. Tested by NABL-certified labs and certified to Indian Standards IS 302.</p>
+                <div class="badges">
+                    <div class="badge">NABL Certified</div>
+                    <div class="badge">IS 302</div>
                 </div>
             </div>
-
-            <div class="grid-item bg-dark">
-                <div class="card-content">
-                    <div class="card-title">24dB</div>
-                    <div class="card-desc">Whisper quiet sleep mode.</div>
-                </div>
-            </div>
-
-            <div class="grid-item bg-dark">
-                <div class="card-content">
-                    <div class="card-title">450 sq.ft</div>
-                    <div class="card-desc">Clean air in 12 mins.</div>
-                </div>
+            <div class="lab-report-container">
+                <img src="lab_report.png" alt="Lab Report" class="lab-report">
             </div>
         </div>
     </section>
-
-    <section class="lab-section">
-        <div class="lab-text">
-            <h2 class="section-title" style="margin-bottom: 20px;">Verified by Science.</h2>
-            <p class="lead">We don't just claim clean air. We prove it in NABL-accredited laboratories against real-world smog conditions.</p>
-        </div>
-        <div class="lab-badges">
-            <div class="badge">
-                <h3>NABL Certified</h3>
-                <p> Filtration Efficiency</p>
-            </div>
-            <div class="badge">
-                <h3>IS 302</h3>
-                <p>Safety Standards</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2 class="section-title">Owners Love Hawaa.</h2>
-        <div class="reviews-grid">
+    
+    <!-- WALL OF LOVE -->
+    <section class="reviews-section">
+        <h2>Wall of Love</h2>
+        <div class="marquee">
+            <!-- First set of reviews -->
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Living in Lajpat Nagar, the dust was killing my sinuses. The Hawaa cleared my bedroom air in literally 10 minutes."</p>
-                <div class="review-author">Rahul K.</div>
-                <div class="review-loc">New Delhi</div>
+                <p class="review-text">"Absolutely transformed my bedroom air quality. I can finally sleep without allergies bothering me. Worth every rupee!"</p>
+                <p class="reviewer-name">— Priya Sharma, Mumbai</p>
             </div>
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Better than my previous Dyson. It’s completely silent at night, which is huge for my baby’s nursery."</p>
-                <div class="review-author">Ananya S.</div>
-                <div class="review-loc">Mumbai</div>
+                <p class="review-text">"The whisper-quiet operation is incredible. I keep it running 24/7 and forget it's even there. Best purchase of 2025."</p>
+                <p class="reviewer-name">— Rahul Mehta, Delhi</p>
             </div>
             <div class="review-card">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Best investment for Gurgaon winters. The design is beautiful and doesn't look like a typical appliance."</p>
-                <div class="review-author">Vikram P.</div>
-                <div class="review-loc">Gurgaon</div>
+                <p class="review-text">"My son's asthma has improved dramatically since we got HAWAA. Clean air is not a luxury, it's a necessity."</p>
+                <p class="reviewer-name">— Anjali Kapoor, Bangalore</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Sleek design, powerful performance. Fits perfectly in my living room and actually cleans the air—you can feel the difference."</p>
+                <p class="reviewer-name">— Vikram Singh, Pune</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Finally, a product that lives up to the hype. No more dust settling on furniture. HAWAA is a game-changer!"</p>
+                <p class="reviewer-name">— Meera Desai, Hyderabad</p>
+            </div>
+            
+            <!-- Duplicate set for infinite loop effect -->
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Absolutely transformed my bedroom air quality. I can finally sleep without allergies bothering me. Worth every rupee!"</p>
+                <p class="reviewer-name">— Priya Sharma, Mumbai</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"The whisper-quiet operation is incredible. I keep it running 24/7 and forget it's even there. Best purchase of 2025."</p>
+                <p class="reviewer-name">— Rahul Mehta, Delhi</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"My son's asthma has improved dramatically since we got HAWAA. Clean air is not a luxury, it's a necessity."</p>
+                <p class="reviewer-name">— Anjali Kapoor, Bangalore</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Sleek design, powerful performance. Fits perfectly in my living room and actually cleans the air—you can feel the difference."</p>
+                <p class="reviewer-name">— Vikram Singh, Pune</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Finally, a product that lives up to the hype. No more dust settling on furniture. HAWAA is a game-changer!"</p>
+                <p class="reviewer-name">— Meera Desai, Hyderabad</p>
             </div>
         </div>
     </section>
-
-    <section>
-        <div class="filter-section">
-            <h2 class="section-title" style="margin-bottom: 10px;">Keep it Fresh.</h2>
-            <p class="lead" style="margin: 0 auto;">Filters last 6-8 months in heavy pollution. Swap in seconds.</p>
-            <div class="price-tag">₹2,499</div>
-            <div class="price-sub">Includes GST & Shipping</div>
-            <button class="btn btn-primary">Add Filter to Cart</button>
+    
+    <!-- FILTER SECTION -->
+    <section class="filter-section">
+        <div class="filter-grid">
+            <div class="filter-image-container">
+                <img src="filter_cartridge.png" alt="HAWAA Filter Cartridge" class="filter-image">
+            </div>
+            <div class="filter-content">
+                <h2>Maintenance Made Easy</h2>
+                <p>Replace your H13 HEPA filter every 6 months for optimal performance. Each filter cartridge is engineered for maximum particle capture and airflow efficiency.</p>
+                <div class="price">₹2,499</div>
+                <button class="filter-cta">Add Filter to Cart</button>
+            </div>
         </div>
     </section>
-
-    <section>
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <div class="faq-item">
-            <details>
-                <summary>How long does the HEPA filter last?</summary>
-                <p>In standard Indian city conditions (AQI 150-300), the H13 filter lasts between 6 to 8 months. Heavy smoking or extreme pollution may reduce this lifespan.</p>
-            </details>
-        </div>
-        <div class="faq-item">
-            <details>
-                <summary>Is it effective against Delhi smog?</summary>
-                <p>Yes. It is specifically engineered with a True HEPA H13 filter to capture 99.97% of PM2.5 particles, which are the primary concern during smog season.</p>
-            </details>
-        </div>
-        <div class="faq-item">
-            <details>
-                <summary>What is the warranty period?</summary>
-                <p>Hawaa comes with a comprehensive 2-year manufacturer warranty covering all electronic components and the motor.</p>
-            </details>
+    
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2>Questions?</h2>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    How often should I replace the filter?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        We recommend replacing your HEPA filter every 6 months for optimal performance. The built-in filter life indicator will alert you when it's time for a replacement.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What room size does HAWAA cover?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        HAWAA is designed to purify rooms up to 450 square feet. It can clean the entire air volume in just 12 minutes on maximum speed.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Is it really as quiet as advertised?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        Yes! HAWAA operates at just 24dB in whisper mode—quieter than a library. You can run it all night without any disturbance to your sleep.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    What warranty do you offer?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        HAWAA comes with a 2-year comprehensive warranty covering all manufacturing defects. We also offer free shipping on all filter replacements during the warranty period.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-    <footer>
-        <a href="#" class="brand-logo" style="font-size: 20px; color: #555;">Hawaa</a>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact Support</a>
-        </div>
-        <p class="made-in">Designed in India. Assembled for the world. © 2026</p>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Designed in India. © 2026</p>
     </footer>
-
-
+    
     <script>
-        // I REMOVED the "Desktop Only" check so you can test it on your iPad
-        // Note: It might feel sensitive on touch devices.
+        // ===========================
+        // GSAP ANIMATIONS & LOGIC
+        // ===========================
         
-        const card = document.getElementById('tilt-card');
-        const glare = card.querySelector('.card-glare');
-        const img = card.querySelector('img');
-
-        // Handle Mouse (Desktop)
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            const rotateX = y * -0.05; // Increased sensitivity
-            const rotateY = x * 0.05;
-
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            
-            const glareX = (x / rect.width) * 100 + 50;
-            const glareY = (y / rect.height) * 100 + 50;
-            glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, transparent 50%)`;
-            glare.style.opacity = '1';
-        });
-
-        // Reset
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-            glare.style.opacity = '0';
-        });
-
-        // Handle Touch (iPad/Mobile) - Simple Tilt
-        card.addEventListener('touchmove', (e) => {
-            // Prevent scrolling while touching the card
-            e.preventDefault(); 
-            const touch = e.touches[0];
-            const rect = card.getBoundingClientRect();
-            const x = touch.clientX - rect.left - rect.width / 2;
-            const y = touch.clientY - rect.top - rect.height / 2;
-            
-            const rotateX = y * -0.05; 
-            const rotateY = x * 0.05;
-
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }, { passive: false });
+        // Register GSAP ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
         
-        card.addEventListener('touchend', () => {
-             card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        // ===========================
+        // NAVIGATION SCROLL EFFECT
+        // ===========================
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
-
+        
+        // ===========================
+        // HERO TEXT ENTRANCE ANIMATION
+        // ===========================
+        // Stagger-fade up effect with delay after page load
+        gsap.from('#headline', {
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            delay: 0.5,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('#subhead', {
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            delay: 0.8,
+            ease: 'power3.out'
+        });
+        
+        // ===========================
+        // STICKY SCROLLYTELLING ENGINE
+        // ===========================
+        // Only initialize GSAP ScrollTrigger on desktop (> 768px)
+        if (window.innerWidth > 768) {
+            // Create a GSAP timeline linked to scroll position
+            const scrollTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#scrollContainer',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1, // Smooth scrubbing: 1 second delay for smooth playback
+                    // markers: true // Uncomment for debugging
+                }
+            });
+            
+            // ===========================
+            // SCROLL PHASE 1: 0-33% (Step 1 - HEPA)
+            // ===========================
+            scrollTimeline
+                .to('#step1', {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                })
+                // Hold Step 1 visible
+                .to('#step1', {
+                    opacity: 1,
+                    duration: 0.4
+                })
+                // ===========================
+                // SCROLL PHASE 2: 33-66% (Step 2 - Silence)
+                // ===========================
+                .to('#step1', {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                })
+                .to('#step2', {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                }, '<') // '<' means start at same time as previous animation
+                .to('#productImage', {
+                    scale: 1.15,
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                }, '<')
+                // Hold Step 2 visible
+                .to('#step2', {
+                    opacity: 1,
+                    duration: 0.4
+                })
+                // ===========================
+                // SCROLL PHASE 3: 66-100% (Step 3 - Coverage)
+                // ===========================
+                .to('#step2', {
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                })
+                .to('#step3', {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                }, '<')
+                .to('#productImage', {
+                    scale: 1.0,
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                }, '<')
+                // Hold Step 3 visible
+                .to('#step3', {
+                    opacity: 1,
+                    duration: 0.4
+                });
+        }
+        
+        // ===========================
+        // FAQ ACCORDION FUNCTIONALITY
+        // ===========================
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const answerContent = item.querySelector('.faq-answer-content');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.height = '0';
+                    }
+                });
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                    answer.style.height = '0';
+                } else {
+                    item.classList.add('active');
+                    answer.style.height = answerContent.offsetHeight + 'px';
+                }
+            });
+        });
     </script>
-
+    
 </body>
 </html>
