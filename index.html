@@ -5,207 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hawaa | Pure Air</title>
     <style>
-        /* CORE RESET & FONTS */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; }
-        body { background-color: #000; color: #fff; overflow-x: hidden; }
+        /* === CORE RESET & GLOBAL STYLES === */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #050505; color: #fff; overflow-x: hidden; }
+        section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        h2.section-title { font-size: 40px; font-weight: 600; margin-bottom: 50px; letter-spacing: -0.5px; }
+        p.lead { font-size: 20px; color: #aaa; line-height: 1.5; max-width: 700px; }
 
-        /* 1. TESLA-STYLE HEADER */
+        /* === 1. TESLA-STYLE HEADER === */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: transparent; /* Crystal clear to show video */
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100; background: transparent;
         }
-
         .brand-logo {
-            font-size: 20px;
-            font-weight: 500; /* Medium weight, NOT bold */
-            letter-spacing: 1px;
-            color: #fff;
-            text-transform: uppercase;
-            text-decoration: none;
-            opacity: 0.95;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Improves visibility over video */
+            font-size: 22px; font-weight: 500; /* Medium weight */
+            letter-spacing: 1px; color: #fff; text-decoration: none;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
-
         .menu-btn {
-            background: rgba(0, 0, 0, 0.2); /* Subtle backing */
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+            background: rgba(50, 50, 50, 0.3); backdrop-filter: blur(10px);
+            padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 500;
+            cursor: pointer; transition: background 0.3s;
         }
-        .menu-btn:hover { background: rgba(255, 255, 255, 0.2); }
+        .menu-btn:hover { background: rgba(80, 80, 80, 0.5); }
 
-        /* 2. HERO SECTION (Video Background) */
+        /* === 2. HERO SECTION (Video Background) === */
         .hero {
-            height: 100vh;
-            width: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
-            align-items: center;
-            padding-top: 18vh; /* Similar spacing to Tesla */
-            text-align: center;
+            height: 100vh; width: 100%; position: relative;
+            display: flex; flex-direction: column; justify-content: flex-start; align-items: center;
+            padding-top: 20vh; text-align: center;
+            padding-left: 0; padding-right: 0; max-width: none; /* Full width */
         }
-
-        /* The Background Video/Image */
         .video-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            /* Slight dim to ensure text pops, but video remains clear */
-            filter: brightness(0.8); 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1;
+            filter: brightness(0.7); /* Dim video slightly for text readability */
         }
-
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-        }
-        .hero p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-        }
+        .hero h1 { font-size: 56px; font-weight: 700; margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 22px; opacity: 0.9; margin-bottom: 30px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
+        .btn-container { display: flex; gap: 15px; }
         .btn {
-            padding: 12px 60px; /* Wide buttons like Tesla */
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s;
+            padding: 14px 50px; border-radius: 4px; font-size: 15px; font-weight: 500;
+            border: none; cursor: pointer; transition: transform 0.2s, background 0.2s;
         }
-        .btn:hover { transform: scale(1.02); }
-        .btn-primary { background: #3e6ae1; color: white; } /* Tesla Blue */
-        .btn-secondary { background: #fff; color: #000; }
+        .btn:hover { transform: scale(1.03); }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-secondary { background: rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(10px); }
 
-        /* 3. 3D BENTO GRID DASHBOARD */
-        .dashboard-section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 32px;
-            margin-bottom: 40px;
-            padding-left: 10px;
-            font-weight: 500;
-        }
-
-        /* The Grid Layout */
+        /* === 3. APPLE-STYLE 3D BENTO GRID === */
         .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 Columns */
-            grid-template-rows: repeat(2, 320px); /* 2 Rows, fixed height */
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 320px);
+            gap: 20px; perspective: 1000px; /* Enables 3D space */
         }
-
-        /* Grid Items (Cards) */
         .grid-item {
-            background: #111;
-            border-radius: 24px; /* Smooth rounded corners */
-            overflow: hidden;
-            position: relative;
-            border: 1px solid #222;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: #111; border-radius: 24px; overflow: hidden; position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+            transform-style: preserve-3d; /* Important for children pop-out */
+            transition: transform 0.2s ease-out, border-color 0.2s;
         }
-        .grid-item:hover { 
-            transform: translateY(-5px); 
-            border-color: #444; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Text inside cards */
-        .card-content {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            z-index: 2;
-        }
+        .grid-item:hover { border-color: rgba(255,255,255,0.2); }
+        .card-content { position: absolute; bottom: 30px; left: 30px; z-index: 2; transform: translateZ(20px); }
         .card-title { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
-        .card-desc { font-size: 15px; color: #aaa; font-weight: 400; }
+        .card-desc { font-size: 16px; color: #aaa; }
 
-        /* SPECIFIC CARD STYLING */
-        
-        /* 1. Main Product Image (Tall Left Card) */
+        /* The 3D Interactive Product Card */
         .item-main {
-            grid-column: span 1;
-            grid-row: span 2;
-            background: #f0f0eb; /* Matches the beige tone of your device */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            grid-column: span 1; grid-row: span 2;
+            background: linear-gradient(135deg, #f0f0eb 0%, #d9d9d4 100%); /* Subtle gradient matching product */
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Deeper shadow for the main card */
         }
         .item-main img {
-            width: 85%;
-            height: auto;
-            max-height: 80%;
-            object-fit: contain;
-            /* Drop shadow to make it look 3D standing in the box */
-            filter: drop-shadow(0 30px 40px rgba(0,0,0,0.25));
-            transition: transform 0.5s ease;
+            width: 85%; height: auto; object-fit: contain;
+            transform: translateZ(60px); /* Makes image float closer to screen than card */
+            filter: drop-shadow(0 30px 30px rgba(0,0,0,0.2));
+            pointer-events: none;
         }
-        .item-main:hover img { transform: scale(1.05); }
-
-        /* 2. Feature Cards */
-        .item-wide { grid-column: span 2; } /* Spans 2 columns */
-        
-        /* Gradients */
-        .bg-gradient-1 { background: linear-gradient(145deg, #1e1e1e, #0d0d0d); }
-        .bg-gradient-2 { background: linear-gradient(145deg, #252525, #151515); }
-        
-        /* Typography for stats */
-        .center-stat {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            text-align: center;
+        /* The Glare Effect Layer */
+        .card-glare {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 60%);
+            opacity: 0; mix-blend-mode: overlay; pointer-events: none; transition: opacity 0.2s; z-index: 5;
         }
-        .stat-number { font-size: 56px; font-weight: 700; color: #fff; letter-spacing: -1px; }
-        .stat-unit { font-size: 16px; color: #888; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;}
+        
+        /* Other Grid Items */
+        .item-wide { grid-column: span 2; }
+        .bg-dark { background: linear-gradient(145deg, #1a1a1a, #0d0d0d); }
+        .center-stat { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; }
+        .stat-number { font-size: 64px; font-weight: 700; letter-spacing: -2px; line-height: 1; }
+        .stat-unit { font-size: 18px; color: #888; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .hero h1 { font-size: 34px; }
-            .hero p { font-size: 16px; }
-            .hero-buttons { flex-direction: column; width: 100%; padding: 0 40px; }
-            .btn { width: 100%; }
-            
-            /* Stack the grid on mobile */
-            .bento-grid {
-                grid-template-columns: 1fr; 
-                grid-template-rows: auto;
-            }
-            /* Product image first on mobile */
+        /* === 4. LAB REPORT SECTION === */
+        .lab-section { display: flex; gap: 60px; align-items: center; border-top: 1px solid #222; padding-top: 100px; }
+        .lab-text { flex: 1; }
+        .lab-badges { display: flex; gap: 30px; flex: 1; }
+        .badge { border: 1px solid #333; padding: 20px; border-radius: 16px; text-align: center; flex: 1; }
+        .badge h3 { font-size: 24px; margin-bottom: 5px; color: #4CAF50; }
+        .badge p { color: #888; }
+
+        /* === 5. REVIEWS SECTION === */
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .review-card { background: #111; padding: 30px; border-radius: 20px; border: 1px solid #222; }
+        .stars { color: #FFD700; margin-bottom: 15px; }
+        .review-text { font-size: 18px; line-height: 1.4; margin-bottom: 20px; font-style: italic; color: #ddd; }
+        .review-author { font-weight: 600; }
+        .review-loc { font-size: 14px; color: #666; }
+
+        /* === 6. FILTER REPLACEMENT SECTION === */
+        .filter-section { text-align: center; background: #0a0a0a; border-radius: 30px; padding: 80px 40px; }
+        .price-tag { font-size: 48px; font-weight: 700; margin: 30px 0 10px; }
+        .price-sub { color: #888; margin-bottom: 30px; }
+
+        /* === 7. FAQ SECTION === */
+        .faq-item { border-bottom: 1px solid #222; padding: 20px 0; }
+        details summary { font-size: 22px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; }
+        details summary::-webkit-details-marker { display: none; }
+        details summary::after { content: '+'; font-size: 28px; font-weight: 300; color: #666; }
+        details[open] summary::after { content: '−'; }
+        details p { font-size: 18px; color: #aaa; margin-top: 15px; line-height: 1.6; padding-right: 40px; }
+
+        /* === 8. FOOTER === */
+        footer { background: #0a0a0a; padding: 80px 20px; margin-top: 100px; text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
+        .footer-links a { color: #666; text-decoration: none; font-size: 14px; }
+        .made-in { color: #444; font-size: 14px; margin-top: 40px; }
+
+        /* === MOBILE RESPONSIVE === */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 42px; }
+            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            /* On mobile, main product is on top, taller */
             .item-main { grid-column: span 1; height: 450px; order: -1; }
-            .item-wide { grid-column: span 1; height: 280px; }
+            /* Disable 3D effect on mobile for performance */
+            .bento-grid { perspective: none; } 
+            .grid-item { transform-style: flat; }
+            .item-main img { transform: none; }
+            
+            .lab-section, .reviews-grid { flex-direction: column; grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
         }
     </style>
 </head>
@@ -213,55 +152,174 @@
 
     <header>
         <a href="#" class="brand-logo">Hawaa</a>
-        
         <div class="menu-btn">Menu</div>
     </header>
 
     <section class="hero">
-        <img src="https://images.unsplash.com/photo-1542223616-9de78165cccd?q=80&w=3274&auto=format&fit=crop" class="video-bg" alt="Hawaa Background">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="hero.mp4.MP4" type="video/mp4">
+        </video>
         
-        <h1>Pure Air (Supervised)</h1>
-        <p>One-time purchase for a lifetime of health.</p>
+        <h1>Pure air, by design.</h1>
+        <p class="lead">Engineered for the specific pollution challenges of Indian cities.</p>
         
-        <div class="hero-buttons">
+        <div class="btn-container">
             <button class="btn btn-primary">Order Now</button>
-            <button class="btn btn-secondary">Learn More</button>
+            <button class="btn btn-secondary">Watch Film</button>
         </div>
     </section>
 
-    <section class="dashboard-section">
+    <section>
         <h2 class="section-title">Engineered for India</h2>
-        
         <div class="bento-grid">
-            
-            <div class="grid-item item-main">
+            <div class="grid-item item-main" id="tilt-card">
+                <div class="card-glare"></div>
                 <img src="purifier.PNG" alt="Hawaa Purifier">
             </div>
 
-            <div class="grid-item item-wide bg-gradient-1 center-stat">
+            <div class="grid-item item-wide bg-dark center-stat">
                 <div class="stat-number">99.97%</div>
                 <div class="stat-unit">Particle Removal (PM 2.5)</div>
                 <div class="card-content">
-                    <div class="card-title" style="font-size: 18px; margin-bottom: 0;">True HEPA H13</div>
+                    <div class="card-title" style="font-size: 20px; margin:0;">True HEPA H13</div>
                 </div>
             </div>
 
-            <div class="grid-item bg-gradient-2">
+            <div class="grid-item bg-dark">
                 <div class="card-content">
                     <div class="card-title">24dB</div>
                     <div class="card-desc">Whisper quiet sleep mode.</div>
                 </div>
             </div>
 
-            <div class="grid-item bg-gradient-2">
+            <div class="grid-item bg-dark">
                 <div class="card-content">
                     <div class="card-title">450 sq.ft</div>
                     <div class="card-desc">Clean air in 12 mins.</div>
                 </div>
             </div>
-
         </div>
     </section>
+
+    <section class="lab-section">
+        <div class="lab-text">
+            <h2 class="section-title" style="margin-bottom: 20px;">Verified by Science.</h2>
+            <p class="lead">We don't just claim clean air. We prove it in NABL-accredited laboratories against real-world smog conditions.</p>
+        </div>
+        <div class="lab-badges">
+            <div class="badge">
+                <h3>NABL Certified</h3>
+                <p> Filtration Efficiency</p>
+            </div>
+            <div class="badge">
+                <h3>IS 302</h3>
+                <p>Safety Standards</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Owners Love Hawaa.</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Living in Lajpat Nagar, the dust was killing my sinuses. The Hawaa cleared my bedroom air in literally 10 minutes."</p>
+                <div class="review-author">Rahul K.</div>
+                <div class="review-loc">New Delhi</div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Better than my previous Dyson. It’s completely silent at night, which is huge for my baby’s nursery."</p>
+                <div class="review-author">Ananya S.</div>
+                <div class="review-loc">Mumbai</div>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Best investment for Gurgaon winters. The design is beautiful and doesn't look like a typical appliance."</p>
+                <div class="review-author">Vikram P.</div>
+                <div class="review-loc">Gurgaon</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="filter-section">
+            <h2 class="section-title" style="margin-bottom: 10px;">Keep it Fresh.</h2>
+            <p class="lead" style="margin: 0 auto;">Filters last 6-8 months in heavy pollution. Swap in seconds.</p>
+            <div class="price-tag">₹2,499</div>
+            <div class="price-sub">Includes GST & Shipping</div>
+            <button class="btn btn-primary">Add Filter to Cart</button>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <details>
+                <summary>How long does the HEPA filter last?</summary>
+                <p>In standard Indian city conditions (AQI 150-300), the H13 filter lasts between 6 to 8 months. Heavy smoking or extreme pollution may reduce this lifespan.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Is it effective against Delhi smog?</summary>
+                <p>Yes. It is specifically engineered with a True HEPA H13 filter to capture 99.97% of PM2.5 particles, which are the primary concern during smog season.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>What is the warranty period?</summary>
+                <p>Hawaa comes with a comprehensive 2-year manufacturer warranty covering all electronic components and the motor.</p>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <a href="#" class="brand-logo" style="font-size: 20px; color: #555;">Hawaa</a>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Support</a>
+        </div>
+        <p class="made-in">Designed in India. Assembled for the world. © 2026</p>
+    </footer>
+
+
+    <script>
+        // Only run on desktop devices based on screen width
+        if (window.innerWidth > 1024) {
+            const card = document.getElementById('tilt-card');
+            const glare = card.querySelector('.card-glare');
+            const img = card.querySelector('img');
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                // Calculate mouse position relative to the card center
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                // Rotation multipliers (adjust for more/less tilt)
+                const rotateX = y * -0.03; // Tilt up/down
+                const rotateY = x * 0.03;  // Tilt left/right
+
+                // Apply transformations
+                // Card tilts, Image translates in Z space for parallax
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                
+                // Move the glare reflection based on mouse position
+                const glareX = (x / rect.width) * 100 + 50;
+                const glareY = (y / rect.height) * 100 + 50;
+                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.3) 0%, transparent 50%)`;
+                glare.style.opacity = '1';
+            });
+
+            // Reset positions when mouse leaves
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                glare.style.opacity = '0';
+            });
+        }
+    </script>
 
 </body>
 </html>
