@@ -62,7 +62,7 @@
             background: #111; border-radius: 24px; overflow: hidden; position: relative;
             border: 1px solid rgba(255,255,255,0.05);
             transform-style: preserve-3d; /* Important for children pop-out */
-            transition: transform 0.2s ease-out, border-color 0.2s;
+            transition: transform 0.1s ease-out; /* Faster for iPad responsiveness */
         }
         .grid-item:hover { border-color: rgba(255,255,255,0.2); }
         .card-content { position: absolute; bottom: 30px; left: 30px; z-index: 2; transform: translateZ(20px); }
@@ -72,13 +72,13 @@
         /* The 3D Interactive Product Card */
         .item-main {
             grid-column: span 1; grid-row: span 2;
-            background: linear-gradient(135deg, #f0f0eb 0%, #d9d9d4 100%); /* Subtle gradient matching product */
+            background: linear-gradient(135deg, #f0f0eb 0%, #d9d9d4 100%); 
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Deeper shadow for the main card */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
         }
         .item-main img {
             width: 85%; height: auto; object-fit: contain;
-            transform: translateZ(60px); /* Makes image float closer to screen than card */
+            transform: translateZ(60px); 
             filter: drop-shadow(0 30px 30px rgba(0,0,0,0.2));
             pointer-events: none;
         }
@@ -132,15 +132,11 @@
         .made-in { color: #444; font-size: 14px; margin-top: 40px; }
 
         /* === MOBILE RESPONSIVE === */
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .hero h1 { font-size: 42px; }
             .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
             /* On mobile, main product is on top, taller */
             .item-main { grid-column: span 1; height: 450px; order: -1; }
-            /* Disable 3D effect on mobile for performance */
-            .bento-grid { perspective: none; } 
-            .grid-item { transform-style: flat; }
-            .item-main img { transform: none; }
             
             .lab-section, .reviews-grid { flex-direction: column; grid-template-columns: 1fr; }
             .btn-container { flex-direction: column; width: 100%; }
@@ -164,12 +160,12 @@
         <p class="lead">Engineered for the specific pollution challenges of Indian cities.</p>
         
         <div class="btn-container">
-            <button class="btn btn-primary">Order Now</button>
+            <button class="btn btn-primary" onclick="document.getElementById('specs').scrollIntoView({behavior: 'smooth'})">Order Now</button>
             <button class="btn btn-secondary">Watch Film</button>
         </div>
     </section>
 
-    <section>
+    <section id="specs">
         <h2 class="section-title">Engineered for India</h2>
         <div class="bento-grid">
             <div class="grid-item item-main" id="tilt-card">
@@ -286,39 +282,55 @@
 
 
     <script>
-        // Only run on desktop devices based on screen width
-        if (window.innerWidth > 1024) {
-            const card = document.getElementById('tilt-card');
-            const glare = card.querySelector('.card-glare');
-            const img = card.querySelector('img');
+        // I REMOVED the "Desktop Only" check so you can test it on your iPad
+        // Note: It might feel sensitive on touch devices.
+        
+        const card = document.getElementById('tilt-card');
+        const glare = card.querySelector('.card-glare');
+        const img = card.querySelector('img');
 
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                // Calculate mouse position relative to the card center
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                // Rotation multipliers (adjust for more/less tilt)
-                const rotateX = y * -0.03; // Tilt up/down
-                const rotateY = x * 0.03;  // Tilt left/right
+        // Handle Mouse (Desktop)
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            const rotateX = y * -0.05; // Increased sensitivity
+            const rotateY = x * 0.05;
 
-                // Apply transformations
-                // Card tilts, Image translates in Z space for parallax
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                
-                // Move the glare reflection based on mouse position
-                const glareX = (x / rect.width) * 100 + 50;
-                const glareY = (y / rect.height) * 100 + 50;
-                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.3) 0%, transparent 50%)`;
-                glare.style.opacity = '1';
-            });
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            
+            const glareX = (x / rect.width) * 100 + 50;
+            const glareY = (y / rect.height) * 100 + 50;
+            glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, transparent 50%)`;
+            glare.style.opacity = '1';
+        });
 
-            // Reset positions when mouse leaves
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                glare.style.opacity = '0';
-            });
-        }
+        // Reset
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            glare.style.opacity = '0';
+        });
+
+        // Handle Touch (iPad/Mobile) - Simple Tilt
+        card.addEventListener('touchmove', (e) => {
+            // Prevent scrolling while touching the card
+            e.preventDefault(); 
+            const touch = e.touches[0];
+            const rect = card.getBoundingClientRect();
+            const x = touch.clientX - rect.left - rect.width / 2;
+            const y = touch.clientY - rect.top - rect.height / 2;
+            
+            const rotateX = y * -0.05; 
+            const rotateY = x * 0.05;
+
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }, { passive: false });
+        
+        card.addEventListener('touchend', () => {
+             card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+
     </script>
 
 </body>
