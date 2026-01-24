@@ -5,101 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hawaa | Pure Air</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        /* Apply Outfit font to everything */
+        body { font-family: 'Outfit', sans-serif; }
         
-        /* Smooth fade-in animation for text */
+        /* Hide scrollbar for the slider but keep functionality */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Smooth fade-in animation */
         .fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
         }
-        
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white antialiased">
 
     <section class="relative h-screen w-full overflow-hidden">
-        
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            class="absolute top-0 left-0 w-full h-full object-cover z-0"
-        >
+        <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover opacity-80">
             <source src="https://cdn.coverr.co/videos/coverr-foggy-forest-road-4560/1080p.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
-
-        <div class="absolute top-0 left-0 w-full h-full bg-black/20 z-1"></div>
-
-        <div class="relative z-10 flex flex-col justify-between h-full py-16 px-6 md:py-24">
-            
-            <div class="text-center fade-in-up" style="animation-delay: 0.2s;">
-                <h1 class="text-5xl md:text-7xl font-semibold tracking-wide mb-2">Hawaa</h1>
-                <p class="text-lg md:text-xl font-light tracking-wider opacity-90">Pure air, by design.</p>
+        
+        <div class="relative z-10 flex flex-col justify-between h-full py-24 px-6">
+            <div class="text-center fade-in-up">
+                <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-2">Hawaa</h1>
+                <p class="text-xl font-light tracking-wide">Pure air, by design.</p>
             </div>
-
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
-                
-                <a href="#order" class="w-full md:w-64 bg-white text-black py-3 rounded text-center text-sm font-medium uppercase tracking-widest hover:bg-gray-200 transition duration-300">
+            
+            <div class="flex flex-col md:flex-row justify-center gap-4 fade-in-up" style="animation-delay: 0.2s;">
+                <a href="#features" class="bg-white text-black px-12 py-3 rounded text-sm font-semibold uppercase tracking-widest hover:bg-gray-200 transition">
                     Order Hawaa One
                 </a>
-
-                <a href="#specs" class="w-full md:w-64 bg-gray-900/60 backdrop-blur-md text-white py-3 rounded text-center text-sm font-medium uppercase tracking-widest hover:bg-gray-800/80 transition duration-300">
-                    View Specs
+                <a href="#features" class="bg-black/50 backdrop-blur-md text-white px-12 py-3 rounded text-sm font-semibold uppercase tracking-widest hover:bg-black/70 transition">
+                    View Features
                 </a>
-            
             </div>
         </div>
-
-        <div class="absolute bottom-4 left-0 w-full flex justify-center z-10 animate-bounce">
-            <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-
     </section>
-    <section id="specs" class="bg-white text-black py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-light mb-4 text-slate-900">Medical Grade Performance.</h2>
-                <p class="text-slate-500 text-sm tracking-[0.2em] uppercase">Engineered for Indian Homes</p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+    <section id="features" class="bg-white text-black py-20">
+        
+        <div class="px-6 mb-8 fade-in-up">
+            <h2 class="text-4xl font-semibold mb-2">Engineered for India</h2>
+            <p class="text-gray-500 text-lg">Swipe to explore performance.</p>
+        </div>
+
+        <div class="flex overflow-x-auto hide-scroll snap-x snap-mandatory gap-6 px-6 pb-10">
+            
+            <div class="snap-center shrink-0 w-[85vw] md:w-[600px] h-[500px] relative rounded-2xl overflow-hidden bg-gray-900 group">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-80 transition duration-700 group-hover:scale-105" alt="Wind Power">
                 
-                <div class="flex flex-col items-center">
-                    <div class="text-6xl font-bold text-slate-900 mb-2">450<span class="text-2xl text-slate-400 font-normal">m³/h</span></div>
-                    <div class="h-1 w-12 bg-blue-500 mb-4"></div>
-                    <p class="text-slate-600 font-medium">CADR Power</p>
-                    <p class="text-slate-400 text-xs mt-2 max-w-[200px]">Cleans a 500 sq.ft room in 12 minutes.</p>
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                
+                <div class="absolute bottom-10 left-8 text-white">
+                    <h3 class="text-5xl font-bold mb-2">450 m³/h</h3>
+                    <p class="text-xl font-medium mb-1">Massive Airflow</p>
+                    <p class="text-gray-300 text-sm max-w-xs">Cleans a standard Delhi living room in just 12 minutes.</p>
                 </div>
-
-                <div class="flex flex-col items-center">
-                    <div class="text-6xl font-bold text-slate-900 mb-2">99.97<span class="text-2xl text-slate-400 font-normal">%</span></div>
-                    <div class="h-1 w-12 bg-green-500 mb-4"></div>
-                    <p class="text-slate-600 font-medium">H13 HEPA Filter</p>
-                    <p class="text-slate-400 text-xs mt-2 max-w-[200px]">Traps PM2.5, viruses, and smoke particles.</p>
-                </div>
-
-                <div class="flex flex-col items-center">
-                    <div class="text-6xl font-bold text-slate-900 mb-2">22<span class="text-2xl text-slate-400 font-normal">dB</span></div>
-                    <div class="h-1 w-12 bg-purple-500 mb-4"></div>
-                    <p class="text-slate-600 font-medium">Silent Mode</p>
-                    <p class="text-slate-400 text-xs mt-2 max-w-[200px]">Quieter than a whisper. Perfect for sleep.</p>
-                </div>
-
             </div>
+
+            <div class="snap-center shrink-0 w-[85vw] md:w-[600px] h-[500px] relative rounded-2xl overflow-hidden bg-gray-900 group">
+                <img src="https://images.unsplash.com/photo-1584627404376-78b3034fb8ba?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-70 transition duration-700 group-hover:scale-105" alt="HEPA Filter">
+                
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+                <div class="absolute bottom-10 left-8 text-white">
+                    <h3 class="text-5xl font-bold mb-2">99.97%</h3>
+                    <p class="text-xl font-medium mb-1">True HEPA H13</p>
+                    <p class="text-gray-300 text-sm max-w-xs">Traps PM2.5, viruses, and smoke particles instantly.</p>
+                </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[85vw] md:w-[600px] h-[500px] relative rounded-2xl overflow-hidden bg-gray-900 group">
+                <img src="https://images.unsplash.com/photo-1513476348324-4f514578b8dc?q=80&w=1000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-60 transition duration-700 group-hover:scale-105" alt="Silent Night">
+                
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+                <div class="absolute bottom-10 left-8 text-white">
+                    <h3 class="text-5xl font-bold mb-2">22 dB</h3>
+                    <p class="text-xl font-medium mb-1">Ultra-Silent Mode</p>
+                    <p class="text-gray-300 text-sm max-w-xs">Engineered for sleep. Quieter than a whisper.</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    </body>
+    <section class="bg-gray-50 py-24 px-6 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-8 text-black">Verified by Science</h2>
+            <div class="flex justify-center gap-4 flex-wrap">
+                <div class="px-8 py-4 bg-white shadow-sm border border-gray-200 rounded text-sm font-bold text-gray-800 uppercase tracking-widest">
+                    BIS Certified
+                </div>
+                <div class="px-8 py-4 bg-white shadow-sm border border-gray-200 rounded text-sm font-bold text-gray-800 uppercase tracking-widest">
+                    Lab Tested
+                </div>
+            </div>
+            <a href="#" class="inline-block mt-10 border-b border-black pb-1 text-sm font-bold uppercase tracking-widest hover:text-gray-600">Download Reports</a>
+        </div>
+    </section>
+
+</body>
 </html>
