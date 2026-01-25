@@ -359,3 +359,213 @@ console.log('Hawaa Landing Page initialized successfully! 🌬️');
 ```
 
 });
+// ========================================
+// SECTION 2: CRISIS SECTION FUNCTIONALITY
+// ========================================
+
+```
+// Scroll-triggered animations for Crisis Section
+ScrollTrigger.create({
+    trigger: ".crisis-section",
+    start: "top 60%",
+    onEnter: () => {
+        // Animate headline
+        gsap.to(".crisis-headline", {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+        
+        // Animate body text
+        gsap.to(".crisis-body", {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            delay: 0.2,
+            ease: "power2.out"
+        });
+        
+        // Animate AQI widget
+        gsap.to(".aqi-widget", {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            delay: 0.4,
+            ease: "back.out(1.2)"
+        });
+        
+        // Animate stat numbers counting up
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const finalValue = parseFloat(stat.dataset.value);
+            animateValue(stat, 0, finalValue, 2000);
+        });
+        
+        // Auto-play crisis video if available
+        const crisisVideo = document.getElementById('crisisVideo');
+        if (crisisVideo && crisisVideo.readyState >= 2) {
+            crisisVideo.play().catch(err => {
+                console.log('Video autoplay prevented:', err);
+            });
+        }
+    }
+});
+
+// Number animation function (count up effect)
+function animateValue(element, start, end, duration) {
+    const isDecimal = end % 1 !== 0;
+    const isLarge = end > 100;
+    let startTimestamp = null;
+    
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        let current = progress * (end - start) + start;
+        
+        // Format based on number type
+        if (isDecimal) {
+            element.textContent = current.toFixed(1);
+        } else if (isLarge) {
+            element.textContent = Math.floor(current) + '%';
+        } else {
+            const suffix = element.dataset.value === '2' ? 'M+' : '';
+            element.textContent = Math.floor(current) + suffix;
+        }
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            // Set final value with proper formatting
+            if (end === 90) {
+                element.textContent = '90%';
+            } else if (end === 16.7) {
+                element.textContent = '16.7 yrs';
+            } else if (end === 2) {
+                element.textContent = '2M+';
+            }
+        }
+    };
+    
+    window.requestAnimationFrame(step);
+}
+
+// Live AQI Data Fetching (Optional - integrate with real API)
+async function fetchAQIData() {
+    try {
+        // Example: Using AQI CN API or IQAir API
+        // const response = await fetch('https://api.waqi.info/feed/delhi/?token=YOUR_TOKEN');
+        // const data = await response.json();
+        
+        // For now, using placeholder data
+        const placeholderData = {
+            aqi: 267,
+            city: 'Delhi NCR',
+            status: 'Very Poor',
+            timestamp: new Date()
+        };
+        
+        updateAQIWidget(placeholderData);
+    } catch (error) {
+        console.error('Failed to fetch AQI data:', error);
+    }
+}
+
+// Update AQI Widget with data
+function updateAQIWidget(data) {
+    const aqiNumber = document.getElementById('aqiNumber');
+    const aqiStatus = document.getElementById('aqiStatus');
+    const aqiBarFill = document.getElementById('aqiBarFill');
+    const cigaretteEquivalent = document.getElementById('cigaretteEquivalent');
+    const aqiUpdateTime = document.getElementById('aqiUpdateTime');
+    
+    if (!aqiNumber) return;
+    
+    // Update AQI number
+    aqiNumber.textContent = data.aqi;
+    
+    // Update status and color based on AQI value
+    let status, colorClass;
+    if (data.aqi <= 50) {
+        status = 'Good';
+        colorClass = 'good';
+    } else if (data.aqi <= 100) {
+        status = 'Moderate';
+        colorClass = 'moderate';
+    } else if (data.aqi <= 200) {
+        status = 'Poor';
+        colorClass = 'poor';
+    } else {
+        status = 'Very Poor';
+        colorClass = 'very-poor';
+    }
+    
+    aqiStatus.textContent = status;
+    aqiNumber.className = 'aqi-number-display ' + colorClass;
+    aqiStatus.className = 'aqi-status ' + colorClass;
+    
+    // Update progress bar (AQI scale 0-500)
+    const percentage = Math.min((data.aqi / 500) * 100, 100);
+    aqiBarFill.style.width = percentage + '%';
+    
+    // Calculate cigarette equivalent (rough estimate: AQI/22 = cigarettes per day)
+    const cigarettes = Math.round(data.aqi / 22);
+    cigaretteEquivalent.textContent = cigarettes;
+    
+    // Update timestamp
+    if (data.timestamp) {
+        const minutesAgo = Math.floor((new Date() - data.timestamp) / 60000);
+        aqiUpdateTime.textContent = minutesAgo === 0 ? 'Just now' : minutesAgo + ' min ago';
+    }
+}
+
+// Fetch AQI data on page load
+fetchAQIData();
+
+// Refresh AQI data every 5 minutes
+setInterval(fetchAQIData, 300000);
+
+// Video handling
+const crisisVideo = document.getElementById('crisisVideo');
+const videoPlaceholder = document.querySelector('.video-placeholder');
+
+if (crisisVideo) {
+    // Show placeholder if video fails to load
+    crisisVideo.addEventListener('error', function() {
+        if (videoPlaceholder) {
+            videoPlaceholder.style.display = 'flex';
+        }
+    });
+    
+    // Hide placeholder if video loads successfully
+    crisisVideo.addEventListener('loadeddata', function() {
+        if (videoPlaceholder) {
+            videoPlaceholder.style.display = 'none';
+        }
+    });
+    
+    // Auto-play on scroll into view (with Intersection Observer)
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                crisisVideo.play().catch(err => {
+                    console.log('Video autoplay prevented:', err);
+                });
+            } else {
+                crisisVideo.pause();
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    videoObserver.observe(crisisVideo);
+}
+
+// Track Crisis Section engagement
+ScrollTrigger.create({
+    trigger: ".crisis-section",
+    start: "top 50%",
+    onEnter: () => {
+        trackEvent('section_view', { section: 'crisis' });
+    }
+});
+```
