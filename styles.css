@@ -551,3 +551,336 @@ clip: rect(0, 0, 0, 0);
 white-space: nowrap;
 border-width: 0;
 }
+/* ========================================
+SECTION 2: CRISIS SECTION
+======================================== */
+
+.crisis-section {
+background: linear-gradient(180deg, #2C2C2C 0%, #1A1A1A 100%);
+padding: 80px 20px;
+color: #FFFFFF;
+}
+
+.crisis-container {
+max-width: 1400px;
+margin: 0 auto;
+}
+
+.crisis-left {
+margin-bottom: 40px;
+}
+
+.crisis-headline {
+font-size: 2rem; /* 32px mobile */
+font-weight: 600;
+line-height: 1.2;
+color: #FFFFFF;
+margin-bottom: 24px;
+opacity: 0;
+}
+
+.crisis-body {
+font-size: 1rem; /* 16px mobile */
+line-height: 1.6;
+color: rgba(255, 255, 255, 0.8);
+margin-bottom: 40px;
+opacity: 0;
+}
+
+/* AQI Widget */
+.aqi-widget {
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(212, 197, 176, 0.3);
+border-radius: 12px;
+padding: 24px;
+margin-bottom: 40px;
+opacity: 0;
+}
+
+.aqi-header {
+margin-bottom: 20px;
+}
+
+.aqi-city {
+font-size: 0.875rem;
+color: rgba(255, 255, 255, 0.7);
+font-weight: 400;
+}
+
+#aqiCityName {
+color: #D4C5B0;
+font-weight: 500;
+}
+
+.aqi-main {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.aqi-number-display {
+font-size: 4rem; /* 64px mobile */
+font-weight: 600;
+line-height: 1;
+margin-bottom: 8px;
+background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.aqi-number-display.good {
+background: linear-gradient(135deg, #27AE60 0%, #229954 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.aqi-number-display.moderate {
+background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.aqi-number-display.poor {
+background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.aqi-number-display.very-poor {
+background: linear-gradient(135deg, #8B008B 0%, #6B006B 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.aqi-status {
+font-size: 1.125rem;
+font-weight: 500;
+color: #E74C3C;
+}
+
+.aqi-status.good {
+color: #27AE60;
+}
+
+.aqi-status.moderate {
+color: #F39C12;
+}
+
+.aqi-status.poor {
+color: #E74C3C;
+}
+
+.aqi-status.very-poor {
+color: #8B008B;
+}
+
+.aqi-bar {
+height: 8px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 4px;
+overflow: hidden;
+margin-bottom: 16px;
+}
+
+.aqi-bar-fill {
+height: 100%;
+background: linear-gradient(90deg, #27AE60 0%, #F39C12 20%, #E74C3C 40%, #8B008B 60%);
+border-radius: 4px;
+transition: width 0.5s ease;
+}
+
+.aqi-equivalent {
+font-size: 0.875rem;
+color: rgba(255, 255, 255, 0.7);
+margin-bottom: 12px;
+text-align: center;
+}
+
+.aqi-equivalent .highlight {
+color: #D4C5B0;
+font-weight: 600;
+font-size: 1.125rem;
+}
+
+.aqi-update {
+font-size: 0.75rem;
+color: rgba(255, 255, 255, 0.5);
+display: flex;
+align-items: center;
+gap: 6px;
+justify-content: center;
+}
+
+.aqi-update svg {
+animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+0%, 100% {
+opacity: 1;
+}
+50% {
+opacity: 0.3;
+}
+}
+
+/* Statistics Grid */
+.crisis-stats {
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px;
+margin-bottom: 40px;
+}
+
+.stat-card {
+text-align: center;
+padding: 24px 16px;
+background: rgba(255, 255, 255, 0.05);
+border-radius: 12px;
+border: 1px solid rgba(212, 197, 176, 0.2);
+}
+
+.stat-number {
+font-size: 2.5rem; /* 40px mobile */
+font-weight: 600;
+line-height: 1;
+color: #3498DB;
+margin-bottom: 12px;
+}
+
+.stat-label {
+font-size: 0.875rem;
+color: rgba(255, 255, 255, 0.7);
+line-height: 1.5;
+}
+
+/* Crisis Right - Video */
+.crisis-right {
+width: 100%;
+}
+
+.crisis-video-container {
+position: relative;
+width: 100%;
+padding-bottom: 56.25%; /* 16:9 aspect ratio */
+background: rgba(255, 255, 255, 0.05);
+border-radius: 16px;
+overflow: hidden;
+}
+
+.crisis-video {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.video-placeholder {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background: linear-gradient(135deg, rgba(44, 44, 44, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%);
+}
+
+.video-placeholder-content {
+text-align: center;
+padding: 20px;
+color: rgba(255, 255, 255, 0.6);
+}
+
+.video-icon {
+margin: 0 auto 16px;
+color: #D4C5B0;
+}
+
+.video-placeholder-content p {
+font-size: 0.875rem;
+margin-bottom: 8px;
+}
+
+.video-placeholder-content .small {
+font-size: 0.75rem;
+opacity: 0.7;
+}
+
+/* ========================================
+TABLET BREAKPOINT (768px and up)
+======================================== */
+@media (min-width: 768px) {
+.crisis-section {
+padding: 120px 40px;
+}
+
+```
+.crisis-container {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 60px;
+    align-items: center;
+}
+
+.crisis-left {
+    margin-bottom: 0;
+}
+
+.crisis-headline {
+    font-size: 2.75rem; /* 44px */
+}
+
+.crisis-body {
+    font-size: 1.125rem; /* 18px */
+}
+
+.aqi-widget {
+    padding: 32px;
+}
+
+.aqi-number-display {
+    font-size: 5rem; /* 80px */
+}
+
+.crisis-stats {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.stat-number {
+    font-size: 3rem; /* 48px */
+}
+```
+
+}
+
+/* ========================================
+DESKTOP BREAKPOINT (1024px and up)
+======================================== */
+@media (min-width: 1024px) {
+.crisis-headline {
+font-size: 3.5rem; /* 56px */
+}
+
+```
+.crisis-body {
+    font-size: 1.25rem; /* 20px */
+}
+
+.aqi-number-display {
+    font-size: 5.5rem; /* 88px */
+}
+
+.stat-number {
+    font-size: 3.5rem; /* 56px */
+}
+```
+
+}
