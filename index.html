@@ -117,7 +117,91 @@
         </div>
     </div>
 </section>
+<!-- SECTION 2: The Problem - Silent Crisis -->
 
+```
+<section class="crisis-section" id="why-hawaa">
+    <div class="crisis-container">
+        <div class="crisis-left">
+            <h1 class="crisis-headline">
+                Your Home's Air is<br>17× Worse Than<br>You Think
+            </h1>
+            
+            <p class="crisis-body">
+                Right now, while you're reading this, your family is breathing PM2.5 particles smaller than a strand of hair. The invisible threat that causes respiratory disease, heart problems, and impacts children's cognitive development.
+            </p>
+            
+            <!-- Live AQI Widget -->
+            <div class="aqi-widget" id="aqiWidget">
+                <div class="aqi-header">
+                    <p class="aqi-city">Your City's Air Quality: <span id="aqiCityName">Delhi NCR</span></p>
+                </div>
+                
+                <div class="aqi-main">
+                    <div class="aqi-number-display" id="aqiNumber">267</div>
+                    <div class="aqi-status" id="aqiStatus">Very Poor</div>
+                </div>
+                
+                <div class="aqi-bar">
+                    <div class="aqi-bar-fill" id="aqiBarFill" style="width: 53.4%"></div>
+                </div>
+                
+                <p class="aqi-equivalent">
+                    Equivalent to smoking <span class="highlight" id="cigaretteEquivalent">11</span> cigarettes per day
+                </p>
+                
+                <p class="aqi-update">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Live Update: <span id="aqiUpdateTime">5 min ago</span>
+                </p>
+            </div>
+            
+            <!-- Statistics Grid -->
+            <div class="crisis-stats">
+                <div class="stat-card">
+                    <div class="stat-number" data-value="90">0%</div>
+                    <div class="stat-label">Children in India breathe toxic air daily</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" data-value="16.7">0</div>
+                    <div class="stat-label">Years of life lost to pollution in Delhi</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number" data-value="2">0M+</div>
+                    <div class="stat-label">Deaths annually in India from air pollution</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="crisis-right">
+            <!-- Video Placeholder -->
+            <div class="crisis-video-container">
+                <video class="crisis-video" id="crisisVideo" loop muted playsinline poster="assets/images/crisis-video-poster.jpg">
+                    <source src="assets/videos/crisis-visualization.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Video placeholder if not available -->
+                <div class="video-placeholder">
+                    <div class="video-placeholder-content">
+                        <svg class="video-icon" width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M23 7L16 12L23 17V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect x="1" y="5" width="15" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <p>Crisis Visualization Video</p>
+                        <p class="small">60 seconds, 1920×1080 MP4</p>
+                        <p class="small">Shows PM2.5 particles filling room → Hawaa cleaning air</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+```
 <script src="script.js"></script>
 ```
 
