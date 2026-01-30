@@ -1,209 +1,293 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hawaa Air Purifier - India's First Beige Air Purifier | ₹6,000</title>
-    <meta name="description" content="Hawaa is India's first design-forward air purifier with gesture control. Almond beige color, 250 CADR, True H13 HEPA filter. IIT Delhi tested, NABL certified. Designed for Delhi's air, priced at ₹6,000.">
+    <title>Trust Badges - Premium Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-```
-<!-- Google Font: Outfit -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
 
-<!-- GSAP for animations -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        .trust-badges-section {
+            background: #FFFFFF;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-<link rel="stylesheet" href="styles.css">
-```
+        .trust-badges-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
+        .trust-badge-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-width: 0;
+        }
+
+        /* Item 1 - Made in India */
+        .indian-flag {
+            width: 48px;
+            height: 32px;
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .flag-stripe {
+            width: 100%;
+            height: 33.33%;
+        }
+
+        .flag-saffron {
+            background: #FF9933;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .flag-white {
+            background: #FFFFFF;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .flag-green {
+            background: #138808;
+            border-radius: 0 0 2px 2px;
+        }
+
+        .ashoka-chakra {
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #000080;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .chakra-spoke {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: #000080;
+            left: 50%;
+            top: 0;
+            transform-origin: center;
+        }
+
+        .chakra-spoke:nth-child(1) { transform: translateX(-50%) rotate(0deg); }
+        .chakra-spoke:nth-child(2) { transform: translateX(-50%) rotate(15deg); }
+        .chakra-spoke:nth-child(3) { transform: translateX(-50%) rotate(30deg); }
+        .chakra-spoke:nth-child(4) { transform: translateX(-50%) rotate(45deg); }
+        .chakra-spoke:nth-child(5) { transform: translateX(-50%) rotate(60deg); }
+        .chakra-spoke:nth-child(6) { transform: translateX(-50%) rotate(75deg); }
+        .chakra-spoke:nth-child(7) { transform: translateX(-50%) rotate(90deg); }
+        .chakra-spoke:nth-child(8) { transform: translateX(-50%) rotate(105deg); }
+        .chakra-spoke:nth-child(9) { transform: translateX(-50%) rotate(120deg); }
+        .chakra-spoke:nth-child(10) { transform: translateX(-50%) rotate(135deg); }
+        .chakra-spoke:nth-child(11) { transform: translateX(-50%) rotate(150deg); }
+        .chakra-spoke:nth-child(12) { transform: translateX(-50%) rotate(165deg); }
+
+        /* Item 2 - Rating */
+        .rating-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .rating-number {
+            font-size: 42px;
+            font-weight: 600;
+            color: #000000;
+            line-height: 1;
+        }
+
+        .star-icon {
+            font-size: 42px;
+            color: #FFD700;
+            line-height: 1;
+        }
+
+        /* Item 3 - Warranty */
+        .warranty-display {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .warranty-number {
+            font-size: 42px;
+            font-weight: 600;
+            color: #6B4CE6;
+            line-height: 1;
+        }
+
+        .warranty-unit {
+            font-size: 24px;
+            font-weight: 500;
+            color: #000000;
+            line-height: 1;
+        }
+
+        /* Label text */
+        .badge-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #000000;
+            letter-spacing: 0.3px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .trust-badges-section {
+                padding: 32px 16px;
+            }
+
+            .trust-badges-container {
+                gap: 40px;
+            }
+
+            .indian-flag {
+                width: 40px;
+                height: 27px;
+            }
+
+            .ashoka-chakra {
+                width: 12px;
+                height: 12px;
+            }
+
+            .rating-number,
+            .warranty-number {
+                font-size: 36px;
+            }
+
+            .warranty-unit {
+                font-size: 20px;
+            }
+
+            .badge-label {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trust-badges-section {
+                padding: 28px 12px;
+            }
+
+            .trust-badges-container {
+                gap: 24px;
+            }
+
+            .indian-flag {
+                width: 36px;
+                height: 24px;
+                margin-bottom: 10px;
+            }
+
+            .ashoka-chakra {
+                width: 11px;
+                height: 11px;
+                border-width: 1.3px;
+            }
+
+            .rating-display,
+            .warranty-display {
+                margin-bottom: 10px;
+            }
+
+            .rating-number,
+            .warranty-number {
+                font-size: 32px;
+            }
+
+            .star-icon {
+                font-size: 32px;
+            }
+
+            .warranty-unit {
+                font-size: 18px;
+            }
+
+            .badge-label {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-```
-<!-- SECTION 0: Navigation Header (Sticky) -->
-<header class="header" id="header">
-    <div class="header-container">
-        <div class="header-logo">
-            <a href="#" class="logo">Hawaa</a>
-        </div>
-        
-        <nav class="header-nav" id="headerNav">
-            <a href="#why-hawaa" class="nav-link">Why Hawaa</a>
-            <a href="#technology" class="nav-link">Technology</a>
-            <a href="#design" class="nav-link">Design</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-        </nav>
-        
-        <div class="header-cta">
-            <button class="btn-primary">Shop Now ₹6,000</button>
-        </div>
-        
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</header>
-
-<!-- SECTION 1: Hero - The Reveal -->
-<section class="hero-section" id="hero">
-    <div class="hero-container">
-        <div class="hero-content">
-            <p class="eyebrow">DESIGNED FOR INDIAN HOMES</p>
-            
-            <h1 class="hero-headline">
-                Breathe Like You're<br>In the Hills
-            </h1>
-            
-            <p class="hero-subheadline">
-                India's first air purifier that looks like furniture. Engineered for Delhi's air, designed for your home.
-            </p>
-        </div>
-        
-        <div class="hero-product">
-            <!-- Product image placeholder - replace with actual image -->
-            <div class="product-image-placeholder">
-                <img src="assets/images/hawaa-hero-product.png" alt="Hawaa Air Purifier in Almond Beige" class="hero-product-img">
-                <!-- Fallback if image not available -->
-                <div class="product-placeholder-box">
-                    <p>Hawaa Product Image</p>
-                    <p class="small">3000×4000px PNG</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="hero-ctas">
-            <button class="btn-primary btn-large">Start Breathing Better — ₹6,000</button>
-            <button class="btn-secondary btn-large" id="openCalculator">Calculate Your Room Size</button>
-        </div>
-        
-        <div class="trust-indicators">
-            <div class="trust-item">
-                <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>IIT Delhi Tested</span>
-            </div>
-            
-            <div class="trust-item">
-                <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
-                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <span>NABL Certified</span>
-            </div>
-            
-            <div class="trust-item">
-                <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>2 Year Warranty</span>
-            </div>
-            
-            <div class="trust-item">
-                <svg class="trust-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>Made in India</span>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- SECTION 2: The Problem - Silent Crisis -->
-
-```
-<section class="crisis-section" id="why-hawaa">
-    <div class="crisis-container">
-        <div class="crisis-left">
-            <h1 class="crisis-headline">
-                Your Home's Air is<br>17× Worse Than<br>You Think
-            </h1>
-            
-            <p class="crisis-body">
-                Right now, while you're reading this, your family is breathing PM2.5 particles smaller than a strand of hair. The invisible threat that causes respiratory disease, heart problems, and impacts children's cognitive development.
-            </p>
-            
-            <!-- Live AQI Widget -->
-            <div class="aqi-widget" id="aqiWidget">
-                <div class="aqi-header">
-                    <p class="aqi-city">Your City's Air Quality: <span id="aqiCityName">Delhi NCR</span></p>
-                </div>
-                
-                <div class="aqi-main">
-                    <div class="aqi-number-display" id="aqiNumber">267</div>
-                    <div class="aqi-status" id="aqiStatus">Very Poor</div>
-                </div>
-                
-                <div class="aqi-bar">
-                    <div class="aqi-bar-fill" id="aqiBarFill" style="width: 53.4%"></div>
-                </div>
-                
-                <p class="aqi-equivalent">
-                    Equivalent to smoking <span class="highlight" id="cigaretteEquivalent">11</span> cigarettes per day
-                </p>
-                
-                <p class="aqi-update">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    Live Update: <span id="aqiUpdateTime">5 min ago</span>
-                </p>
-            </div>
-            
-            <!-- Statistics Grid -->
-            <div class="crisis-stats">
-                <div class="stat-card">
-                    <div class="stat-number" data-value="90">0%</div>
-                    <div class="stat-label">Children in India breathe toxic air daily</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-number" data-value="16.7">0</div>
-                    <div class="stat-label">Years of life lost to pollution in Delhi</div>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-number" data-value="2">0M+</div>
-                    <div class="stat-label">Deaths annually in India from air pollution</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="crisis-right">
-            <!-- Video Placeholder -->
-            <div class="crisis-video-container">
-                <video class="crisis-video" id="crisisVideo" loop muted playsinline poster="assets/images/crisis-video-poster.jpg">
-                    <source src="assets/videos/crisis-visualization.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                
-                <!-- Video placeholder if not available -->
-                <div class="video-placeholder">
-                    <div class="video-placeholder-content">
-                        <svg class="video-icon" width="64" height="64" viewBox="0 0 24 24" fill="none">
-                            <path d="M23 7L16 12L23 17V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="1" y="5" width="15" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                        <p>Crisis Visualization Video</p>
-                        <p class="small">60 seconds, 1920×1080 MP4</p>
-                        <p class="small">Shows PM2.5 particles filling room → Hawaa cleaning air</p>
+    <div class="trust-badges-section">
+        <div class="trust-badges-container">
+            <!-- Item 1: Made in India -->
+            <div class="trust-badge-item">
+                <div class="indian-flag">
+                    <div class="flag-stripe flag-saffron"></div>
+                    <div class="flag-stripe flag-white">
+                        <div class="ashoka-chakra">
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                            <div class="chakra-spoke"></div>
+                        </div>
                     </div>
+                    <div class="flag-stripe flag-green"></div>
                 </div>
+                <p class="badge-label">Made in India</p>
+            </div>
+
+            <!-- Item 2: Rating -->
+            <div class="trust-badge-item">
+                <div class="rating-display">
+                    <span class="rating-number">5</span>
+                    <span class="star-icon">★</span>
+                </div>
+                <p class="badge-label">Highly Rated</p>
+            </div>
+
+            <!-- Item 3: Warranty -->
+            <div class="trust-badge-item">
+                <div class="warranty-display">
+                    <span class="warranty-number">1</span>
+                    <span class="warranty-unit">Yr</span>
+                </div>
+                <p class="badge-label">PAN India Warranty</p>
             </div>
         </div>
     </div>
-</section>
-```
-<script src="script.js"></script>
-```
-
 </body>
 </html>
